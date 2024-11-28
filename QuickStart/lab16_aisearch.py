@@ -261,7 +261,7 @@ def _update_index():
 if __name__ == "__main__":
 
     _delete_index()
-    _create_index()
+    # _create_index()
     # _update_index()
     # _upload_document()
     # _merge_document()

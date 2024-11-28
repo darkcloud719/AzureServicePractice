@@ -1,7 +1,6 @@
 import openai
 import os
 from dotenv import load_dotenv
-from rich import print as pprint
 
 def main():
     openai.api_key = os.getenv("OPENAI_API_KEY")

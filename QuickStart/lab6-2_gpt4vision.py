@@ -14,8 +14,6 @@ def main():
 
     img = encode_image("cat.jpg")
 
-    pprint(img)
-
     response = openai.chat.completions.create(
         model = os.getenv("AZURE_OPENAI_DEPLOYMENT_FOR_VISION"),
         messages = [

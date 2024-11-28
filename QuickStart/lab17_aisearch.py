@@ -32,7 +32,7 @@ from azure.search.documents.indexes.models import(
     SemanticPrioritizedFields,
     SemanticSearch
 )
-from dotenv import load_dotenv()
+from dotenv import load_dotenv
 from typing import List
 from rich import print as pprint
 
@@ -66,7 +66,7 @@ def _create_index():
     try:
         fields = [
             SimpleField(name="id", type=SearchFieldDataType.String, key=True, sortable=True, filterable=True, facetable=True),
-            SearchableField(name="title", type=SearchFieldDataType.String).
+            SearchableField(name="title", type=SearchFieldDataType.String),
             SearchableField(name="category", type=SearchFieldDataType.String, filterable=True),
             SearchableField(name="content", type=SearchFieldDataType.String)
         ]
@@ -100,7 +100,7 @@ def _create_index():
         )
         
         with SearchIndexClient(service_endpoint, AzureKeyCredential(key)) as search_index_client:
-            result = search_index_client.create_index(inidex)
+            result = search_index_client.create_index(index)
             print(f"{result.name} created")
     except Exception as ex:
         logger.error(ex)
@@ -120,7 +120,7 @@ def _simple_search():
     
     try:
         with SearchClient(service_endpoint, index_name, AzureKeyCredential(key)) as search_client:
-            result = search_client.search(
+            results = search_client.search(
                 query_type=QueryType.SIMPLE,
                 search_text="gateway",
                 include_total_count=True
@@ -144,7 +144,7 @@ def _semantic_search():
                 search_text="gateway",
                 semantic_configuration_name="my-semantic-config",
                 query_caption="extractive",
-                query_answer="extractive"
+                query_answer="extractive",
                 include_total_code=True
             )
                           
@@ -170,7 +170,7 @@ def _full_search():
                 # search_text="title:gateway",
                 # search_text="rating:[4 TO 5]",
                 # search_text="gateway AND (networking OR security)",
-                search_text="category:'Databases' AND NOT title:'Azure Cosmos DB'"
+                search_text="category:'Databases' AND NOT title:'Azure Cosmos DB'",
                 include_total_count=True,
                 top=2
             )
