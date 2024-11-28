@@ -1,5 +1,5 @@
 import tiktoken
 
-encoder = tiktoken.encoding_for_model("gpt-4")
+encoder = tiktoken.encoding_for_model("gpt-3.5-turbo")
 
-print(encoder.encode("I am Nick."))
+print(encoder.encode("apple"))
